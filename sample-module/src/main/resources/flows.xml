@@ -1,0 +1,25 @@
+<flows>
+
+    <flow name="flow1">
+        <job name="job1">
+            <command>sh abc.sh</command>
+            <arguments>-a ${kefnm} -b ${kcnve}</arguments>
+        </job>
+        <job name="job2">
+            <command>sh xyz.sh</command>
+            <arguments>-a ${kefnm} -b ${kcnve}</arguments>
+            <dependency>job1</dependency>
+        </job>
+        <job name="job3">
+            <command>sh xyz.sh</command>
+            <arguments>-a ${kefnm} -b ${kcnve}</arguments>
+            <dependency>job2</dependency>
+        </job>
+        <job name="job4">
+            <command>sh xyz.sh</command>
+            <arguments>-a ${kefnm} -b ${kcnve}</arguments>
+            <dependency>job3</dependency>
+        </job>
+    </flow>
+
+</flows>
