@@ -22,6 +22,22 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <repository>
+            <id>azkaban-job-generation-plugin</id>
+            <url>
+                packagecloud+https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin
+            </url>
+        </repository>
+        <snapshotRepository>
+            <id>azkaban-job-generation-plugin</id>
+            <url>
+                packagecloud+https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin
+            </url>
+        </snapshotRepository>
+    </distributionManagement>
+
+
     <build>
         <plugins>
 
@@ -49,6 +65,15 @@
             </plugin>
 
         </plugins>
+
+        <extensions>
+            <extension>
+                <groupId>io.packagecloud.maven.wagon</groupId>
+                <artifactId>maven-packagecloud-wagon</artifactId>
+                <version>0.0.4</version>
+            </extension>
+        </extensions>
+
     </build>
 
 

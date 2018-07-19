@@ -1,0 +1,14 @@
+sudo: false
+language: scala
+services:
+- docker
+cache:
+  directories:
+  - "$HOME/.cache"
+
+deploy:
+  provider: script
+  skip_cleanup: true
+    script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
+  on:
+    tags: true
