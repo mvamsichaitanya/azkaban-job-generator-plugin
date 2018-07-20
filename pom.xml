@@ -9,11 +9,18 @@
     <version>1.0.0</version>
     <modules>
         <module>job-generation-plugin</module>
-        <module>sample-module</module>
     </modules>
 
     <packaging>pom</packaging>
     <name>Azkaban Job Generation Plugin</name>
+    <url>https://github.com/vamsi1995/azkaban-job-generator-plugin</url>
+
+    <scm>
+        <connection>scm:git:ssh://github.com/vamsi1995/azkaban-job-generator-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/vamsi1995/azkaban-job-generator-plugin.git</developerConnection>
+        <url>https://github.com/vamsi1995/azkaban-job-generator-plugin</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>org.scala-lang.modules</groupId>
@@ -24,16 +31,12 @@
 
     <distributionManagement>
         <repository>
-            <id>azkaban-job-generation-plugin</id>
-            <url>
-                packagecloud+https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin
-            </url>
+            <id>packagecloud-travis</id>
+            <url>packagecloud+https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin</url>
         </repository>
         <snapshotRepository>
-            <id>azkaban-job-generation-plugin</id>
-            <url>
-                packagecloud+https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin
-            </url>
+            <id>packagecloud-travis</id>
+            <url>packagecloud+https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -74,7 +77,9 @@
             </extension>
         </extensions>
 
+
     </build>
+
 
 
 </project>

@@ -8,7 +8,14 @@ cache:
 
 deploy:
   provider: script
-  skip_cleanup: true
     script: "cp .travis.settings.xml $HOME/.m2/settings.xml && mvn deploy"
+    skip_cleanup: true
   on:
     tags: true
+
+notifications:
+  email:
+    recipients:
+    - chaitanyamvamsi@gmail.com
+    on_success: change
+    on_failure: always
