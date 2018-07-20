@@ -1,9 +1,9 @@
-package com.kohls.bigdata.dse.azkaban.jobgeneration
+package vamsi1995.azkaban.jobgeneration
 
-import com.kohls.bigdata.dse.azkaban.jobgeneration.constants.Constants._
-import com.kohls.bigdata.dse.azkaban.jobgeneration.elements.{Flow, Job}
-import com.kohls.bigdata.dse.azkaban.jobgeneration.utils.ValidationUtils._
-import com.kohls.bigdata.dse.azkaban.jobgeneration.utils.Utils._
+import vamsi1995.azkaban.jobgeneration.constants.Constants._
+import vamsi1995.azkaban.jobgeneration.elements.{Flow, Job}
+import vamsi1995.azkaban.jobgeneration.utils.ValidationUtils._
+import vamsi1995.azkaban.jobgeneration.utils.Utils._
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter}
 import scala.collection.immutable

@@ -1,8 +1,8 @@
-package com.kohls.bigdata.dse.azkaban.jobgeneration.utils
+package vamsi1995.azkaban.jobgeneration.utils
 
 import java.io._
 import java.util.zip.{ZipEntry, ZipOutputStream}
-import com.kohls.bigdata.dse.azkaban.jobgeneration.elements.{Flow, Job}
+import vamsi1995.azkaban.jobgeneration.elements.{Flow, Job}
 import scala.collection.immutable
 
 object Utils {

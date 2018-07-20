@@ -1,4 +1,4 @@
-package com.kohls.bigdata.dse.azkaban.jobgeneration.constants
+package vamsi1995.azkaban.jobgeneration.constants
 
 object Constants {
   /**

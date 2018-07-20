@@ -1,6 +1,6 @@
-package com.kohls.bigdata.dse.azkaban.jobgeneration.utils
+package vamsi1995.azkaban.jobgeneration.utils
 
-import com.kohls.bigdata.dse.azkaban.jobgeneration.elements.Flow
+import vamsi1995.azkaban.jobgeneration.elements.Flow
 
 import scala.collection.{immutable, mutable}
 

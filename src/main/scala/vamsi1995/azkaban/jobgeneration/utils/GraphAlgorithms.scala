@@ -1,4 +1,4 @@
-package com.kohls.bigdata.dse.azkaban.jobgeneration.utils
+package vamsi1995.azkaban.jobgeneration.utils
 
 import scala.collection.mutable
 import scala.collection.immutable

@@ -1,6 +1,6 @@
-package com.kohls.bigdata.dse.azkaban.jobgeneration.elements
+package vamsi1995.azkaban.jobgeneration.elements
 
-import com.kohls.bigdata.dse.azkaban.jobgeneration.utils.Graph
+import vamsi1995.azkaban.jobgeneration.utils.Graph
 
 /**
   *
