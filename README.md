@@ -77,12 +77,13 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 3. Parameters of plugin and default values
 
-#####parameter   =>         default_value
-```jobsFile```   =>         project.basedir/src/main/resources/flows.xml
+```parameter```       =>         ```default_value```
 
-```outputDirectory``` =>   project.build.directory
+```jobsFile```        =>         project.basedir/src/main/resources/flows.xml
 
-```zipFile```     => azkaban
+```outputDirectory``` =>         project.build.directory
+
+```zipFile```         =>          azkaban
 
 4. After successful build of project, job files and azkaban.zip will be created in target folder.
 
