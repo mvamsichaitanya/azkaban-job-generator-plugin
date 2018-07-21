@@ -1,9 +1,9 @@
-package vamsi1995.azkaban.jobgeneration
+package com.github.vamsi.azkaban.jobgeneration
 
-import vamsi1995.azkaban.jobgeneration.constants.Constants._
-import vamsi1995.azkaban.jobgeneration.elements.{Flow, Job}
-import vamsi1995.azkaban.jobgeneration.utils.ValidationUtils._
-import vamsi1995.azkaban.jobgeneration.utils.Utils._
+import com.github.vamsi.azkaban.jobgeneration.constants.Constants._
+import com.github.vamsi.azkaban.jobgeneration.elements.{Flow, Job}
+import com.github.vamsi.azkaban.jobgeneration.utils.ValidationUtils._
+import com.github.vamsi.azkaban.jobgeneration.utils.Utils._
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter}
 import scala.collection.immutable
@@ -36,6 +36,14 @@ class JobGenerationMojo extends AbstractMojo {
   private val jobsFile: String = null
 
   /**
+    * Name of the zip file
+    * default value is azkaban
+    */
+  @Parameter(defaultValue = "azkaban")
+  private val zipFile: String = null
+
+
+  /**
     * Return List of flows in the xml file
     *
     * @param xmlFile xml file
@@ -46,7 +54,10 @@ class JobGenerationMojo extends AbstractMojo {
     val flows = xmlFile \\ FlowsStr \\ FlowStr
 
     flows.map(flow => {
-      val name = flow.attribute(Name).get.text
+      val name = flow.attribute(Name) match {
+        case None => throw new Exception("Flow name is not defined \n Attribute 'name' is mandatory for the flow")
+        case _ => flow.attribute(Name).get.text
+      }
       val jobs = getJobs(flow)
       Flow(name, jobs, createGraph(jobs))
     })
@@ -71,17 +82,21 @@ class JobGenerationMojo extends AbstractMojo {
     */
   override def execute(): Unit = {
 
-    val output = outputDirectory
+    val outputPath = outputDirectory
+    val zipName = zipFile
     val xmlFile = xml.XML.loadFile(jobsFile)
     val flows = getFlows(xmlFile)
-
+    val flowsOutputDir = outputPath + s"/$zipName"
+    createDirectory(flowsOutputDir)
     validateFlows(flows)
     flows.foreach(flow => {
       validateFlow(flow.graph)
-      generateJobFiles(flow, output)
+      val flowOutputDir = flowsOutputDir + s"/${flow.name}"
+      createDirectory(flowOutputDir)
+      generateJobFiles(flow, flowOutputDir)
     })
 
-    makeZip(flows, output)
+    makeZip(flows, outputPath, zipName)
 
   }
 

@@ -1,4 +1,4 @@
-package vamsi1995.azkaban.jobgeneration.utils
+package com.github.vamsi.azkaban.jobgeneration.utils
 
 import scala.collection.mutable
 import scala.collection.immutable
@@ -121,19 +121,19 @@ object GraphAlgorithms {
     val unVisitedNodes = nodes.filterNot(visitedNodes.contains)
 
     if (unVisitedNodes.lengthCompare(0) > 0)
-      throw new Exception(s"${unVisitedNodes.mkString(",")} nodes are not visited during traversal")
+      throw new Exception(s"connectivity not found in graph at ${unVisitedNodes.mkString(",")}")
 
     true
   }
 
   def getLeafNodes[T](graph: mutable.ListMap[T, immutable.Seq[T]],
-                      nodes:immutable.Seq[T]): Seq[T] = {
+                      nodes: immutable.Seq[T]): Seq[T] = {
 
     val nodesWithOutDegrees = graph.filter(tuple => tuple._2.nonEmpty).keys.toSeq
-    val zeroOutdegreeNodes = nodes.filterNot(nodesWithOutDegrees.contains)
-    if(zeroOutdegreeNodes.isEmpty)
-      throw new Exception(s"no leaf nodes found in $graph")
-  zeroOutdegreeNodes
+    val zeroOutDegreeNodes = nodes.filterNot(nodesWithOutDegrees.contains)
+    if (zeroOutDegreeNodes.isEmpty)
+      throw new Exception(s"no leaf jobs found in $graph")
+    zeroOutDegreeNodes
   }
 
 }

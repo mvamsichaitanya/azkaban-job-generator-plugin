@@ -1,4 +1,4 @@
-package vamsi1995.azkaban.jobgeneration.constants
+package com.github.vamsi.azkaban.jobgeneration.constants
 
 object Constants {
   /**
@@ -7,6 +7,12 @@ object Constants {
   final val FlowsStr = "flows"
   final val FlowStr = "flow"
   final val JobStr = "job"
+  final val workingDirStr = "working.dir"
+  final val retriesStr = "retries"
+  final val retryBackoffStr = "retry.backoff"
+  final val failureEmailsStr = "failure.emails"
+  final val successEmailsStr = "success.emails"
+  final val notifyEmails = "notify.emails"
 
   /**
     * Parameter Constants

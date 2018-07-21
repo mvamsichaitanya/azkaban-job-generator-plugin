@@ -1,8 +1,8 @@
-package vamsi1995.azkaban.jobgeneration.utils
+package com.github.vamsi.azkaban.jobgeneration.utils
 
 import java.io._
 import java.util.zip.{ZipEntry, ZipOutputStream}
-import vamsi1995.azkaban.jobgeneration.elements.{Flow, Job}
+import com.github.vamsi.azkaban.jobgeneration.elements.{Flow, Job}
 import scala.collection.immutable
 
 object Utils {
@@ -36,9 +36,20 @@ object Utils {
   }
 
   /**
+    *
+    * @param driPath path of the directory
+    */
+  def createDirectory(driPath: String): Unit = {
+    val path = new File(driPath)
+    val creation = path.mkdir()
+    if (!creation)
+      throw new Exception(s"failed to create directory $path")
+  }
+
+  /**
     * Generates job files for given Sequence of jobs
     *
-    * @param flow flow of type  [[Flow]]
+    * @param flow       flow of type  [[Flow]]
     * @param outputPath : output path where job files to be generated
     */
   def generateJobFiles(flow: Flow, outputPath: String): Unit = {
@@ -56,7 +67,13 @@ object Utils {
       val file = new File(outputPath + s"/${job.name}.job")
       val bw = new BufferedWriter(new FileWriter(file))
       bw.write("type=command\n")
-      bw.write(s"command=${job.command} ${job.arguments} \n")
+      bw.write(s"command=${job.command} ${job.arguments}\n")
+      bw.write(s"working.dir=${job.workingDir}\n")
+      bw.write(s"retries=${job.retries}\n")
+      bw.write(s"retry.backoff=${job.retryBackoff}\n")
+      bw.write(s"failure.emails=${job.failureEmails}\n")
+      bw.write(s"success.emails=${job.successEmails}\n")
+      bw.write(s"notify.emails=${job.notifyEmails}\n")
       bw.write(s"dependencies=${job.dependency.mkString(",")}")
       bw.close()
     })
@@ -69,13 +86,14 @@ object Utils {
     * @param flows      Sequence of [[Flow]]
     * @param outputPath output path where zip file to be generated
     */
-  def makeZip(flows: Seq[Flow], outputPath: String): Unit = {
-    val zip = new ZipOutputStream(new FileOutputStream(outputPath + "/azkaban.zip"))
-
+  def makeZip(flows: Seq[Flow], outputPath: String, zipName: String): Unit = {
+    val zip = new ZipOutputStream(new FileOutputStream(outputPath + s"/$zipName.zip"))
+    val flowsOutputDir = outputPath + s"/$zipName"
     flows.foreach { flow => {
 
+      val flowOutputDir = flowsOutputDir + s"/${flow.name}"
       val flowName = flow.name
-      val path = outputPath + s"/$flowName.job"
+      val path = flowOutputDir + s"/$flowName.job"
       zip.putNextEntry(new ZipEntry(s"/$flowName.job"))
       val in = new BufferedInputStream(new FileInputStream(path))
       var b = in.read()
@@ -87,7 +105,7 @@ object Utils {
       zip.closeEntry()
 
       flow.jobs.foreach(job => {
-        val path = outputPath + s"/${job.name}.job"
+        val path = flowOutputDir + s"/${job.name}.job"
         zip.putNextEntry(new ZipEntry(s"/${job.name}.job"))
         val in = new BufferedInputStream(new FileInputStream(path))
         var b = in.read()

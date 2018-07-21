@@ -1,6 +1,6 @@
-package vamsi1995.azkaban.jobgeneration.elements
+package com.github.vamsi.azkaban.jobgeneration.elements
 
-import vamsi1995.azkaban.jobgeneration.utils.Graph
+import com.github.vamsi.azkaban.jobgeneration.utils.Graph
 
 /**
   *

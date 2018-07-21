@@ -1,7 +1,6 @@
-package vamsi1995.azkaban.jobgeneration.utils
+package com.github.vamsi.azkaban.jobgeneration.utils
 
-import vamsi1995.azkaban.jobgeneration.elements.Flow
-
+import com.github.vamsi.azkaban.jobgeneration.elements.Flow
 import scala.collection.{immutable, mutable}
 
 object ValidationUtils {

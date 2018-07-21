@@ -1,7 +1,6 @@
-package vamsi1995.azkaban.jobgeneration.utils
+package com.github.vamsi.azkaban.jobgeneration.utils
 
-import scala.collection.mutable
-import scala.collection.immutable
+import scala.collection.{mutable, immutable}
 
 /**
   * Generic Directed graph of type `T`
