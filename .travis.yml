@@ -7,7 +7,7 @@ script: mvn --settings .travis/settings.xml clean verify
 deploy:
   provider: script
   script: mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.3:set
-    -B -U -DnewVersion=$TRAVIS_TAG -Prelease && mvn --settings .travis/settings.xml
+    -B -U -DnewVersion=$TRAVIS_TAG -Prelease && mvn --settings .travis.settings.xml
     clean deploy -B -U -Prelease
 
   skip_cleanup: true
