@@ -41,9 +41,23 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 </flows>
 ```
 
-2. Create a new module in your project which is clone of job-generation-plugin module of the repo.
+2. Add following plugin repository and plugin to project pom.xml.
 
-3. Add following in the module pom where flows.xml file is present.
+```    <pluginRepositories>
+   <pluginRepository>
+       <id>jbj</id>
+       <snapshots>
+           <enabled>true</enabled>
+       </snapshots>
+       <releases>
+           <enabled>true</enabled>
+       </releases>
+       <url>https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin/maven2</url>
+   </pluginRepository>
+       </pluginRepositories>
+       
+       
+```
 
 ```       <plugin>
                 <groupId>azkaban-job-generation</groupId>
@@ -61,9 +75,14 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
             </plugin>
 ```
 
-Default location of flows.xml file resources folder of module 
+3. Parameters of plugin and default values
 
-we can also set as a ```flowsFile```parameter
+#####parameter   =>         default_value
+```jobsFile```   =>         project.basedir/src/main/resources/flows.xml
+
+```outputDirectory``` =>   project.build.directory
+
+```zipFile```     => azkaban
 
 4. After successful build of project, job files and azkaban.zip will be created in target folder.
 
