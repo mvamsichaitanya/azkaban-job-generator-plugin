@@ -62,9 +62,9 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 ```      
             <plugin>
-                <groupId>azkaban-job-generation</groupId>
-                <artifactId>job-generation-plugin</artifactId>
-                <version>1.0.0</version>
+                <groupId>com.github.vamsi</groupId>
+                <artifactId>azkaban-job-generation</artifactId>
+                <version>1.0.3</version>
                 <executions>
                     <execution>
                         <phase>install</phase>
@@ -72,7 +72,6 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
                             <goal>job_generation</goal>
                         </goals>
                     </execution>
-
                 </executions>
             </plugin>
 ```
