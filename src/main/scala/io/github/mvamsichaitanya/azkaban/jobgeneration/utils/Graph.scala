@@ -1,4 +1,4 @@
-package com.github.vamsi.azkaban.jobgeneration.utils
+package io.github.mvamsichaitanya.azkaban.jobgeneration.utils
 
 import scala.collection.{mutable, immutable}
 

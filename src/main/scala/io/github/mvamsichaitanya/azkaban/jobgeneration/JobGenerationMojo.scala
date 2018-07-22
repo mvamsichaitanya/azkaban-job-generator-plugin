@@ -1,9 +1,9 @@
-package com.github.vamsi.azkaban.jobgeneration
+package io.github.mvamsichaitanya.azkaban.jobgeneration
 
-import com.github.vamsi.azkaban.jobgeneration.constants.Constants._
-import com.github.vamsi.azkaban.jobgeneration.elements.{Flow, Job}
-import com.github.vamsi.azkaban.jobgeneration.utils.ValidationUtils._
-import com.github.vamsi.azkaban.jobgeneration.utils.Utils._
+import io.github.mvamsichaitanya.azkaban.jobgeneration.constants.Constants._
+import io.github.mvamsichaitanya.azkaban.jobgeneration.elements.{Flow, Job}
+import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.ValidationUtils._
+import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.Utils._
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter}
 import scala.collection.immutable

@@ -1,8 +1,8 @@
-package com.github.vamsi.azkaban.jobgeneration.utils
+package io.github.mvamsichaitanya.azkaban.jobgeneration.utils
 
 import java.io._
 import java.util.zip.{ZipEntry, ZipOutputStream}
-import com.github.vamsi.azkaban.jobgeneration.elements.{Flow, Job}
+import io.github.mvamsichaitanya.azkaban.jobgeneration.elements.{Flow, Job}
 import scala.collection.immutable
 
 object Utils {

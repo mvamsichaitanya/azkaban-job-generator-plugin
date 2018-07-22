@@ -4,18 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.vamsi</groupId>
+    <groupId>io.github.mvamsichaitanya</groupId>
     <artifactId>azkaban-job-generation</artifactId>
     <version>1.0.0</version>
 
     <packaging>maven-plugin</packaging>
     <name>Azkaban Job Generation Plugin</name>
-    <url>https://github.com/MvamsiChiaitanya/azkaban-job-generator-plugin</url>
+    <url>https://github.com/mvamsichaitanya/azkaban-job-generator-plugin</url>
 
     <scm>
-        <connection>scm:git:ssh://github.com/MvamsiChiaitanya/azkaban-job-generator-plugin.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/MvamsiChiaitanya/azkaban-job-generator-plugin.git</developerConnection>
-        <url>https://github.com/MvamsiChiaitanya/azkaban-job-generator-plugin</url>
+        <connection>scm:git:ssh://github.com/mvamsichaitanya/azkaban-job-generator-plugin.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/mvamsichaitanya/azkaban-job-generator-plugin.git</developerConnection>
+        <url>https://github.com/mvamsichaitanya/azkaban-job-generator-plugin</url>
     </scm>
 
     <dependencies>
@@ -49,11 +49,11 @@
     <distributionManagement>
         <repository>
             <id>packagecloud-travis</id>
-            <url>packagecloud+https://packagecloud.io/Mvamsi/azkaban-job-generation-plugin</url>
+            <url>packagecloud+https://packagecloud.io/mvamsi/azkaban-job-generation-plugin</url>
         </repository>
         <snapshotRepository>
             <id>packagecloud-travis</id>
-            <url>packagecloud+https://packagecloud.io/Mvamsi/azkaban-job-generation-plugin</url>
+            <url>packagecloud+https://packagecloud.io/mvamsi/azkaban-job-generation-plugin</url>
         </snapshotRepository>
     </distributionManagement>
 

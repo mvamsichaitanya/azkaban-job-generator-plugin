@@ -1,4 +1,4 @@
-package com.github.vamsi.azkaban.jobgeneration.constants
+package io.github.mvamsichaitanya.azkaban.jobgeneration.constants
 
 object Constants {
   /**
