@@ -43,7 +43,8 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 2. Add following plugin repository and plugin to project pom.xml.
 
-```    <pluginRepositories>
+```    
+ <pluginRepositories>
    <pluginRepository>
        <id>job-generation</id>
        <snapshots>
@@ -54,12 +55,13 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
        </releases>
        <url>https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin/maven2</url>
    </pluginRepository>
-       </pluginRepositories>
+ </pluginRepositories>
        
        
 ```
 
-```       <plugin>
+```      
+            <plugin>
                 <groupId>azkaban-job-generation</groupId>
                 <artifactId>job-generation-plugin</artifactId>
                 <version>1.0.0</version>
