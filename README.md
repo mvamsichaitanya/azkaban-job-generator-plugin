@@ -53,7 +53,7 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
        <releases>
            <enabled>true</enabled>
        </releases>
-       <url>https://packagecloud.io/vamsi1995/azkaban-job-generation-plugin/maven2</url>
+       <url>https://packagecloud.io/Mvamsi/azkaban-job-generation-plugin/maven2</url>
    </pluginRepository>
  </pluginRepositories>
        
@@ -91,4 +91,4 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 ### LICENSE
 
-[MIT](https://github.com/vamsi1995/azkaban-job-generation-plugin/blob/master/LICENSE)
+[MIT](https://github.com/MvamsiChiaitanya/azkaban-job-generation-plugin/blob/master/LICENSE)
