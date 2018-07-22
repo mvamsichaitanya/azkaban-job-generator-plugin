@@ -91,4 +91,4 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 ### LICENSE
 
-[MIT](https://github.com/MvamsiChiaitanya/azkaban-job-generation-plugin/blob/master/LICENSE)
+[MIT](https://github.com/mvamsichaitanya/azkaban-job-generator-plugin/blob/master/LICENSE.txt)
