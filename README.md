@@ -6,7 +6,7 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 * Representing flows in simple xml format
 
-* During build it will validate every flow whether it is a valid DAG or not.
+* During build it will validate every flow whether it is a valid DAG or not and generates zip of job files in target directory.
 
 ### How to use.
 
@@ -45,7 +45,7 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 ```    <pluginRepositories>
    <pluginRepository>
-       <id>jbj</id>
+       <id>job-generation</id>
        <snapshots>
            <enabled>true</enabled>
        </snapshots>
