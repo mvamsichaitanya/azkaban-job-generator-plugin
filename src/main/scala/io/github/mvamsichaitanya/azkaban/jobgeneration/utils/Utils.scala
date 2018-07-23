@@ -47,6 +47,19 @@ object Utils {
   }
 
   /**
+    *
+    * @param dir : directory path
+    * @return List of files
+    */
+  def getListOfPropFiles(dir: String): List[File] = {
+    val file = new File(dir)
+    file.listFiles.filter(_.isFile)
+      .filter(_.getName.endsWith(".properties")).
+      toList
+  }
+
+
+  /**
     * Generates job files for given Sequence of jobs
     *
     * @param flow       flow of type  [[Flow]]
@@ -80,13 +93,32 @@ object Utils {
 
   }
 
+  def addPropFiles(zip: ZipOutputStream, files: List[File]): ZipOutputStream = {
+    files.foreach(file => {
+      val path = file.getPath
+      zip.putNextEntry(new ZipEntry(file.getName))
+      val in = new BufferedInputStream(new FileInputStream(path))
+      var b = in.read()
+      while (b > -1) {
+        zip.write(b)
+        b = in.read()
+      }
+      in.close()
+      zip.closeEntry()
+    })
+    zip
+  }
+
   /**
     * Make zip for Sequence of flows mentioned in flows.xml
     *
     * @param flows      Sequence of [[Flow]]
     * @param outputPath output path where zip file to be generated
     */
-  def makeZip(flows: Seq[Flow], outputPath: String, zipName: String): Unit = {
+  def makeZip(flows: Seq[Flow],
+              propFiles: List[File],
+              outputPath: String,
+              zipName: String): Unit = {
     val zip = new ZipOutputStream(new FileOutputStream(outputPath + s"/$zipName.zip"))
     val flowsOutputDir = outputPath + s"/$zipName"
     flows.foreach { flow => {
@@ -118,7 +150,9 @@ object Utils {
       })
     }
     }
-    zip.close()
+
+    val withPropsZip = addPropFiles(zip, propFiles)
+    withPropsZip.close()
   }
 
 

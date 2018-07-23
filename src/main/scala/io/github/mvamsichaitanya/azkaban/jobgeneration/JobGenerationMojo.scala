@@ -32,7 +32,10 @@ class JobGenerationMojo extends AbstractMojo {
     * path of flows.xml file
     * default value is project.basedir/src/main/resources/flows.xml
     */
-  @Parameter(defaultValue = "${project.basedir}/src/main/resources/flows.xml")
+  @Parameter(defaultValue = "${project.basedir}/src/main/resources")
+  private val resourcesPath: String = null
+
+  @Parameter(defaultValue = "flows.xml")
   private val jobsFile: String = null
 
   /**
@@ -82,9 +85,11 @@ class JobGenerationMojo extends AbstractMojo {
     */
   override def execute(): Unit = {
 
+    val inputPath = resourcesPath
+    val jobsFileName = jobsFile
     val outputPath = outputDirectory
     val zipName = zipFile
-    val xmlFile = xml.XML.loadFile(jobsFile)
+    val xmlFile = xml.XML.loadFile(inputPath + "/" + jobsFileName)
     val flows = getFlows(xmlFile)
     val flowsOutputDir = outputPath + s"/$zipName"
     createDirectory(flowsOutputDir)
@@ -95,8 +100,8 @@ class JobGenerationMojo extends AbstractMojo {
       createDirectory(flowOutputDir)
       generateJobFiles(flow, flowOutputDir)
     })
-
-    makeZip(flows, outputPath, zipName)
+    val propFiles = getListOfPropFiles(inputPath)
+    makeZip(flows, propFiles, outputPath, zipName)
 
   }
 
