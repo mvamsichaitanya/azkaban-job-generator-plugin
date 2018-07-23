@@ -1,20 +1,36 @@
+## see https://travis-ci.org/phillip-kruger/apiee
 language: scala
 
-cache:
-  directories:
-  - "$HOME/.cache"
-install: mvn install -P !build-extras -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-script: mvn test -P !build-extras -B
+## export GPG details
+before_install:
+    - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
+    - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
 
+install:
+    mvn --settings .maven.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
+
+## Build and release to maven central
+script:
+    mvn clean deploy --settings .maven.xml -DskipTests=true -B -U -Prelease
+
+## Get the project version
+before_deploy:
+    - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+    - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
+
+deploy:
+- provider: script
+  script: mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.3:set
+    -B -U -DnewVersion=$TRAVIS_TAG -Prelease && mvn --settings .travis/settings.xml
+    clean deploy -B -U -Prelease
+  skip_cleanup: true
+  on:
+    tags: true
+    all_branches: true
+    condition: "$TRAVIS_TAG =~ ^[0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*"
 notifications:
   email:
-    recipients:
-    - chaitanyamvamsi@gmail.com
-    on_success: change
-    on_failure: always
-
-after_success:
-  - openssl aes-256-cbc -K $encrypted_02e7bfc60840_key -iv $encrypted_02e7bfc60840_iv -in .travis/codesigning.asc.enc -out .travis/codesigning.asc -d
-  - gpg --fast-import .travis/codesigning.asc
-  - mvn deploy -P sign,build-extras --settings .travis/settings.xml
-
+  - chaitanyamvamsi@gmail.com
+cache:
+  directories:
+  - "$HOME/.m2"
