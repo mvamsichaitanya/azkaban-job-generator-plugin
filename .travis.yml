@@ -1,4 +1,4 @@
-language: java
+language: scala
 jdk:
 - openjdk8
 script: mvn --settings .travis/settings.xml clean verify
@@ -11,16 +11,16 @@ deploy:
     all_branches: true
 notifications:
   email:
-     recipients:
-     - chaitanyamvamsi@gmail.com
-     on_success: change
-     on_failure: always
+    recipients:
+    - chaitanyamvamsi@gmail.com
+    on_success: change
+    on_failure: always
 cache:
   directories:
-  - "$HOME/.m2"
+  - "$HOME/.cache"
 after_success:
   - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/pubring.gpg.enc -out $GPG_DIR/pubring.gpg -d
-- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/secring.gpg.enc -out $GPG_DIR/secring.gpg -d
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/secring.gpg.enc -out $GPG_DIR/secring.gpg -d
 env:
   global:
   - GPG_DIR="`pwd`/.travis"
