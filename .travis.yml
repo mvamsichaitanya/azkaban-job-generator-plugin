@@ -4,25 +4,23 @@ jdk:
 script: mvn --settings .travis/settings.xml clean verify
 deploy:
 - provider: script
-  script: mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.3:set
-    -B -U -DnewVersion=$TRAVIS_TAG -Prelease && mvn --settings .travis/settings.xml
-    clean deploy -B -U -Prelease
+  script: mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.3:set -B -U -DnewVersion=$TRAVIS_TAG -Prelease && mvn --settings .travis/settings.xml clean deploy -B -U -Prelease
   skip_cleanup: true
   on:
     tags: true
     all_branches: true
-    condition: "$TRAVIS_TAG =~ ^[0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*"
 notifications:
   email:
-  - it@exadatum.com
+     recipients:
+     - chaitanyamvamsi@gmail.com
+     on_success: change
+     on_failure: always
 cache:
   directories:
   - "$HOME/.m2"
 after_success:
-  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/pubring.gpg.enc
-  -out $GPG_DIR/pubring.gpg -d
-- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/secring.gpg.enc
-  -out $GPG_DIR/secring.gpg -d
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/pubring.gpg.enc -out $GPG_DIR/pubring.gpg -d
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/secring.gpg.enc -out $GPG_DIR/secring.gpg -d
 env:
   global:
   - GPG_DIR="`pwd`/.travis"
