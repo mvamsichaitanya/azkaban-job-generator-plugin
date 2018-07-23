@@ -1,4 +1,4 @@
-language: scala
+language: java
 jdk:
 - openjdk8
 script: mvn --settings .travis/settings.xml clean verify
@@ -14,7 +14,7 @@ deploy:
     condition: "$TRAVIS_TAG =~ ^[0-9][0-9]*\\.[0-9][0-9]*\\.[0-9][0-9]*"
 notifications:
   email:
-  - chaitanyamvamsi@gmail.com
+  - it@exadatum.com
 cache:
   directories:
   - "$HOME/.m2"
