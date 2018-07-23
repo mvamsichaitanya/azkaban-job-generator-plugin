@@ -48,11 +48,11 @@ object Utils {
 
   /**
     *
-    * @param dir : directory path
-    * @return List of files
+    * @param directoryPath : directory path
+    * @return List of properties files in the dir
     */
-  def getListOfPropFiles(dir: String): List[File] = {
-    val file = new File(dir)
+  def getListOfPropFiles(directoryPath: String): List[File] = {
+    val file = new File(directoryPath)
     file.listFiles.filter(_.isFile)
       .filter(_.getName.endsWith(".properties")).
       toList

@@ -9,54 +9,82 @@
     <version>1.0.0</version>
 
     <packaging>maven-plugin</packaging>
-    <name>Azkaban Job Generation Plugin</name>
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Generates Azkaban jobs in zip format by taking flows in xml file and
+        validates flows during build</description>
     <url>https://github.com/mvamsichaitanya/azkaban-job-generator-plugin</url>
+
+    <properties>
+        <scala.binary.version>2.11</scala.binary.version>
+        <maven-plugin-api.version>3.0</maven-plugin-api.version>
+        <maven-plugin-annotations.version>3.4</maven-plugin-annotations.version>
+        <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
+        <maven-plugin-plugin.version>3.3</maven-plugin-plugin.version>
+        <scala-maven-plugin.version>3.3.2</scala-maven-plugin.version>
+        <maven-packagecloud-wagon.version>0.0.4</maven-packagecloud-wagon.version>
+        <scala-xml.version>1.1.0</scala-xml.version>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>http://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>mvamsichaitanya</id>
+            <name>Maddineni Vamsi Chaitanya</name>
+            <email>chaitanyamvamsi@gmail.com</email>
+            <timezone>+5:30</timezone>
+        </developer>
+    </developers>
 
     <scm>
         <connection>scm:git:ssh://github.com/mvamsichaitanya/azkaban-job-generator-plugin.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/mvamsichaitanya/azkaban-job-generator-plugin.git</developerConnection>
-        <url>https://github.com/mvamsichaitanya/azkaban-job-generator-plugin</url>
+        <url>https://github.com/mvamsichaitanya/azkaban-job-generator-plugin.git</url>
     </scm>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
             <groupId>org.scala-lang.modules</groupId>
-            <artifactId>scala-xml_2.11</artifactId>
-            <version>1.1.0</version>
+            <artifactId>scala-xml_${scala.binary.version}</artifactId>
+            <version>${scala-xml.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.maven</groupId>
             <artifactId>maven-plugin-api</artifactId>
-            <version>3.0</version>
+            <version>${maven-plugin-api.version}</version>
         </dependency>
 
         <!-- dependencies to annotations -->
         <dependency>
             <groupId>org.apache.maven.plugin-tools</groupId>
             <artifactId>maven-plugin-annotations</artifactId>
-            <version>3.4</version>
+            <version>${maven-plugin-annotations.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.0.0</version>
+            <version>${build-helper-maven-plugin.version}</version>
         </dependency>
 
     </dependencies>
-
-    <distributionManagement>
-        <repository>
-            <id>packagecloud-travis</id>
-            <url>packagecloud+https://packagecloud.io/mvamsi/azkaban-job-generation-plugin</url>
-        </repository>
-        <snapshotRepository>
-            <id>packagecloud-travis</id>
-            <url>packagecloud+https://packagecloud.io/mvamsi/azkaban-job-generation-plugin</url>
-        </snapshotRepository>
-    </distributionManagement>
-
 
     <build>
         <plugins>
@@ -64,7 +92,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-plugin-plugin</artifactId>
-                <version>3.3</version>
+                <version>${maven-plugin-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>default-descriptor</id>
@@ -88,7 +116,7 @@
             <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>${scala-maven-plugin.version}</version>
                 <configuration>
                     <jvmArgs>
                         <jvmArg>-Xms64m</jvmArg>
@@ -110,16 +138,70 @@
 
         </plugins>
 
-        <extensions>
-            <extension>
-                <groupId>io.packagecloud.maven.wagon</groupId>
-                <artifactId>maven-packagecloud-wagon</artifactId>
-                <version>0.0.4</version>
-            </extension>
-        </extensions>
-
 
     </build>
+    <profiles>
+
+        <profile>
+            <id>sign</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>build-extras</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.4</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.10.3</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
 
 
 
