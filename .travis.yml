@@ -1,23 +1,7 @@
-## see https://travis-ci.org/phillip-kruger/apiee
 language: scala
-
-## export GPG details
-before_install:
-    - echo $GPG_SECRET_KEYS | base64 --decode | $GPG_EXECUTABLE --import
-    - echo $GPG_OWNERTRUST | base64 --decode | $GPG_EXECUTABLE --import-ownertrust
-
-install:
-    mvn --settings .travis/settings.xml install -DskipTests=true -Dgpg.skip -Dmaven.javadoc.skip=true -B -V
-
-## Build and release to maven central
-script:
-    mvn clean deploy --settings .travis/settings.xml -DskipTests=true -B -U -Prelease
-
-## Get the project version
-before_deploy:
-    - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-    - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\[')
-
+jdk:
+- openjdk8
+script: mvn --settings .travis/settings.xml clean verify
 deploy:
 - provider: script
   script: mvn --settings .travis/settings.xml org.codehaus.mojo:versions-maven-plugin:2.3:set
@@ -34,3 +18,11 @@ notifications:
 cache:
   directories:
   - "$HOME/.m2"
+after_success:
+  - openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/pubring.gpg.enc
+  -out $GPG_DIR/pubring.gpg -d
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in $GPG_DIR/secring.gpg.enc
+  -out $GPG_DIR/secring.gpg -d
+env:
+  global:
+  - GPG_DIR="`pwd`/.travis"
