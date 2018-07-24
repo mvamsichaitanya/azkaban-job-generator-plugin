@@ -45,16 +45,14 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 ```    
  <pluginRepositories>
-   <pluginRepository>
-       <id>job-generation</id>
-       <snapshots>
-           <enabled>true</enabled>
-       </snapshots>
-       <releases>
-           <enabled>true</enabled>
-       </releases>
-       <url>https://packagecloud.io/mvamsi/azkaban-job-generation-plugin/maven2</url>
-   </pluginRepository>
+        <pluginRepository>
+            <id>oss-sonatype</id>
+            <name>oss-sonatype</name>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
  </pluginRepositories>
        
        
@@ -65,9 +63,14 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
                 <groupId>io.github.mvamsichaitanya</groupId>
                 <artifactId>azkaban-job-generation</artifactId>
                 <version>1.0.0</version>
+                <inherited>false</inherited>
+                <configuration>
+                    <resourcesPath>${project.basedir}/src/main/resources/</resourcesPath>
+                    <jobsFile>flows.xml</jobsFile>
+                </configuration>
                 <executions>
                     <execution>
-                        <phase>install</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>job_generation</goal>
                         </goals>
@@ -80,15 +83,32 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 ```parameter```       =>         ```default_value```
 
-```jobsFile```        =>         project.basedir/src/main/resources/flows.xml
+```resourcesPath```   =>         ${project.basedir}/src/main/resources/
 
-```outputDirectory``` =>         project.build.directory
+```jobsFile```        =>         flows.xml
+
+```outputDirectory``` =>         ${project.build.directory}
 
 ```zipFile```         =>          azkaban
 
 4. After successful build of project, job files and azkaban.zip will be created in target folder.
 
+5. azkaban.zip contains job files generated from flows.xml and properties file present in ```resourcesPath```
 
+6. following parameters can be set for job.
+
+  ```
+  command
+  arguments
+  working.dir
+  retries
+  retry.backoff
+  failure.emails
+  success.emails
+  notify.emails
+  dependency
+
+```
 ### LICENSE
 
 [MIT](https://github.com/mvamsichaitanya/azkaban-job-generator-plugin/blob/master/LICENSE.txt)
