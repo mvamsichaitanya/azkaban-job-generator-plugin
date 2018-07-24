@@ -81,15 +81,15 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 3. Parameters of plugin and default values
 
-```parameter```       =>         ```default_value```
-
-```resourcesPath```   =>         ${project.basedir}/src/main/resources/
-
-```jobsFile```        =>         flows.xml
-
-```outputDirectory``` =>         ${project.build.directory}
-
-```zipFile```         =>          azkaban
+    ```parameter```       =>         ```default_value```
+    
+    ```resourcesPath```   =>         ${project.basedir}/src/main/resources/
+    
+    ```jobsFile```        =>         flows.xml
+    
+    ```outputDirectory``` =>         ${project.build.directory}
+    
+    ```zipFile```         =>          azkaban
 
 4. After successful build of project, job files and azkaban.zip will be created in target folder.
 
@@ -97,18 +97,19 @@ Generates Azkaban jobs in zip format by taking flows in xml file.
 
 6. following parameters can be set for job.
 
-  ```
-  command
-  arguments
-  working.dir
-  retries
-  retry.backoff
-  failure.emails
-  success.emails
-  notify.emails
-  dependency
+```
+      command
+      arguments
+      working.dir
+      retries
+      retry.backoff
+      failure.emails
+      success.emails
+      notify.emails
+      dependency
 
 ```
+
 ### LICENSE
 
 [MIT](https://github.com/mvamsichaitanya/azkaban-job-generator-plugin/blob/master/LICENSE.txt)
