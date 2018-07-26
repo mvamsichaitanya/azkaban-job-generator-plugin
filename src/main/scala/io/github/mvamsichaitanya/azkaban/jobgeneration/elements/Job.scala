@@ -42,12 +42,12 @@ object Job {
         val value = (node \\ Dependency).text.trim
         if (value.isEmpty) Nil else value.split(Comma).toSeq
       },
-      workingDir = (node \\ workingDirStr).text,
-      retries = (node \\ retriesStr).text,
-      retryBackoff = (node \\ retryBackoffStr).text,
-      failureEmails = (node \\ failureEmailsStr).text,
-      successEmails = (node \\ successEmailsStr).text,
-      notifyEmails = (node \\ notifyEmails).text
+      workingDir = (node \\ WorkingDirStr).text,
+      retries = (node \\ RetriesStr).text,
+      retryBackoff = (node \\ RetryBackoffStr).text,
+      failureEmails = (node \\ FailureEmailsStr).text,
+      successEmails = (node \\ SuccessEmailsStr).text,
+      notifyEmails = (node \\ NotifyEmails).text
     )
   }
 

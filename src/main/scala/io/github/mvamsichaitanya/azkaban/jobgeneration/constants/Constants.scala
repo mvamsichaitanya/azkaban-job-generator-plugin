@@ -15,13 +15,15 @@ object Constants {
   final val Name = "name"
   final val Arguments = "arguments"
   final val Command = "command"
-  final val workingDirStr = "working.dir"
-  final val retriesStr = "retries"
-  final val retryBackoffStr = "retry.backoff"
-  final val failureEmailsStr = "failure.emails"
-  final val successEmailsStr = "success.emails"
-  final val notifyEmails = "notify.emails"
+  final val WorkingDirStr = "working.dir"
+  final val RetriesStr = "retries"
+  final val RetryBackoffStr = "retry.backoff"
+  final val FailureEmailsStr = "failure.emails"
+  final val SuccessEmailsStr = "success.emails"
+  final val NotifyEmails = "notify.emails"
   final val Dependency = "dependency"
+  final val PropertyFiles = "propertyFiles"
+  final val File = "file"
 
   /**
     * string constants

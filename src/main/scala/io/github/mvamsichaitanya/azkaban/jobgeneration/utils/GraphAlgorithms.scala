@@ -15,6 +15,7 @@ object GraphAlgorithms {
     * @return false if graph is acyclic
     */
   def isCyclic[T](graph: mutable.ListMap[T, immutable.Seq[T]]): Boolean = {
+
     /**
       * Recursive method to perform DFS(Depth first search) and detect cycle
       *
