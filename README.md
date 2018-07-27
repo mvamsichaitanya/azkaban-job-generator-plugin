@@ -3,7 +3,7 @@
 azkaban-job-generation-plugin generates Azkaban flows in zip format by taking flows in xml file.
 It also validates DAG of the flow during build.
 
-Available from the [Central Repository](https://search.maven.org/#artifactdetails%7Cio.github.mvamsichaitanya%7Cazkaban-job-generation%7C1.0.0%7Cmaven-plugin) 
+Available from the [Central Repository](https://mvnrepository.com/artifact/io.github.mvamsichaitanya/azkaban-job-generation) 
 
 ### Features
 
