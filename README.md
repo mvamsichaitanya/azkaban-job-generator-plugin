@@ -11,9 +11,9 @@ Available from the [Central Repository](https://search.maven.org/#artifactdetail
 
 * During build it will validate every graph of the flow with following algorithms
  
- => Cycle detection (throws Exception if cycle is detected)
+   => Cycle detection (throws Exception if cycle is detected)
  
- => Graph connectivity (throws Exception if jobs of the flow are not connected)
+   => Graph connectivity (throws Exception if jobs of the flow are not connected)
  
 * Generates zip of job files and property files in output directory with following structure.
   
