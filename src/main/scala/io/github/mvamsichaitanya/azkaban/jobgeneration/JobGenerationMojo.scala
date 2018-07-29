@@ -147,7 +147,6 @@ class JobGenerationMojo extends AbstractMojo {
 
     createDirectory(flowsOutputDir)
     addPropFiles(commonPropFiles, inputPath, flowsOutputDir)
-    validateFlows(flows)
 
     flows.foreach(flow => {
       validateFlow(flow.graph)

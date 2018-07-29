@@ -38,24 +38,4 @@ object ValidationUtils {
       throw new Exception("more than one DAG found")
   }
 
-  /**
-    * Check whether duplicate jobs are present or not in flows.xml file
-    *
-    * @param flows Sequence of flows
-    */
-  def validateFlows(flows: Seq[Flow]): Unit = {
-    val jobVisited = mutable.Map[String, Boolean]()
-    flows.foreach(
-      flow => {
-        flow.jobs.foreach(job => {
-          val jobName = job.name
-          if (!jobVisited.getOrElse(jobName, false))
-            jobVisited(jobName) = true
-          else
-            throw new Exception(s"$jobName job is found more than one time in flows.xml file")
-        })
-      }
-    )
-  }
-
 }
