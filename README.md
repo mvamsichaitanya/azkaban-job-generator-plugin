@@ -92,7 +92,7 @@ Available from the [Central Repository](https://mvnrepository.com/artifact/io.gi
             <plugin>
                 <groupId>io.github.mvamsichaitanya</groupId>
                 <artifactId>azkaban-job-generation</artifactId>
-                <version>1.0.1</version>
+                <version>1.0.3</version>
                 <inherited>false</inherited>
                 <configuration>
                     <resourcesPath>${project.basedir}/src/main/resources/</resourcesPath>
