@@ -1,6 +1,5 @@
 package io.github.mvamsichaitanya.azkaban.jobgeneration.utils
 
-import io.github.mvamsichaitanya.azkaban.jobgeneration.elements.Flow
 import scala.collection.{immutable, mutable}
 
 object ValidationUtils {

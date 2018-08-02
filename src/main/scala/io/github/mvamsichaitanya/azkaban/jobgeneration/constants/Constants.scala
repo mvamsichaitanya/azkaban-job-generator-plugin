@@ -12,6 +12,7 @@ object Constants {
     * Parameter Constants
     */
 
+  final val CustomJobStr = "customJob"
   final val Name = "name"
   final val Arguments = "arguments"
   final val Command = "command"
@@ -24,6 +25,11 @@ object Constants {
   final val Dependency = "dependency"
   final val PropertyFiles = "propertyFiles"
   final val File = "file"
+
+  /**
+    * Job Types
+    */
+  final val True = "true"
 
   /**
     * string constants

@@ -7,6 +7,7 @@ import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.ValidationUtils._
 import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.Utils._
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter}
+
 import scala.collection.immutable
 import scala.xml.{Elem, Node}
 
@@ -21,7 +22,6 @@ class JobGenerationMojo extends AbstractMojo {
   /**
     * Parameters for plugin
     */
-
   /**
     * path where zip file and job file to be generated
     * default value is project.build.directory
@@ -34,7 +34,10 @@ class JobGenerationMojo extends AbstractMojo {
     * default value is project.basedir/src/main/resources/flows.xml
     */
   @Parameter(defaultValue = "${project.basedir}/src/main/resources")
-  private val resourcesPath: String = null
+  private val flowsPath: String = null
+
+  @Parameter(defaultValue = "${project.basedir}/src/main/resources")
+  private val propertiesPath: String = null
 
   /**
     * names of the flows file
@@ -125,8 +128,8 @@ class JobGenerationMojo extends AbstractMojo {
   /**
     * Main execution method
     * Steps:-
-    * 1) load xml file
-    * 2) get all flows present in xml file
+    * 1)load xml file
+    * 2)get all flows present in xml file
     * 3)validates flow
     * 4)Create directories for all flows
     * 5)generated job files for all flows in their respective directories
@@ -136,25 +139,27 @@ class JobGenerationMojo extends AbstractMojo {
     */
   override def execute(): Unit = {
 
-    val inputPath = resourcesPath
+    val inputFlowsPath = flowsPath
+    val inputPropPath = propertiesPath
     val jobsFileName = jobsFile
     val outputPath = outputDirectory
     val zipName = zipFile
-    val xmlFile = xml.XML.loadFile(s"$inputPath/$jobsFileName")
+    val xmlFile = xml.XML.loadFile(s"$inputFlowsPath/$jobsFileName")
     val flows = getFlows(xmlFile)
     val flowsOutputDir = s"$outputPath/$zipName"
     val commonPropFiles = getCommonPropertyFiles(xmlFile)
 
     createDirectory(flowsOutputDir)
-    addPropFiles(commonPropFiles, inputPath, flowsOutputDir)
+    addPropFiles(commonPropFiles, inputPropPath, flowsOutputDir)
 
     flows.foreach(flow => {
       validateFlow(flow.graph)
       val flowOutputDir = s"$flowsOutputDir/${flow.name}"
       createDirectory(flowOutputDir)
       generateJobFiles(flow, flowOutputDir)
-      addPropFiles(flow.propFiles, inputPath, flowOutputDir)
+      addPropFiles(flow.propFiles, inputPropPath, flowOutputDir)
     })
+
     makeZip(flowsOutputDir)
   }
 

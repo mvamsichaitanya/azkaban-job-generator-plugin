@@ -1,8 +1,11 @@
 package io.github.mvamsichaitanya.azkaban.jobgeneration.utils
 
 import java.io._
+
 import better.files.File.root
-import io.github.mvamsichaitanya.azkaban.jobgeneration.elements.Flow
+import io.github.mvamsichaitanya.azkaban.jobgeneration.elements.{CommandJob, CustomJob, Flow}
+import io.github.mvamsichaitanya.azkaban.jobgeneration.enums.JobTypes
+import io.github.mvamsichaitanya.azkaban.jobgeneration.constants.Constants.CustomJobStr
 
 object Utils {
 
@@ -32,7 +35,11 @@ object Utils {
     */
   def generateJobFiles(flow: Flow, outputPath: String): Unit = {
 
-    val jobs = flow.jobs
+    val commandJobs = flow.jobs.filter(job => job.jobType == JobTypes.Command).
+      map(_.asInstanceOf[CommandJob])
+    val customJobs = flow.jobs.filter(job => job.jobType == JobTypes.Custom).
+      map(_.asInstanceOf[CustomJob])
+
     val flowName = flow.name
     val file = new File(outputPath + s"/$flowName.job")
     val bw = new BufferedWriter(new FileWriter(file))
@@ -41,7 +48,7 @@ object Utils {
     bw.write(s"dependencies=$endJobs")
     bw.close()
 
-    jobs.foreach(job => {
+    commandJobs.foreach(job => {
       val file = new File(outputPath + s"/${job.name}.job")
       val bw = new BufferedWriter(new FileWriter(file))
       bw.write("type=command\n")
@@ -55,6 +62,17 @@ object Utils {
       bw.write(s"dependencies=${job.dependency.mkString(",")}")
       bw.close()
     })
+
+    customJobs.foreach { job => {
+      val file = new File(outputPath + s"/${job.name}.job")
+      val bw = new BufferedWriter(new FileWriter(file))
+      val allAttributes = job.node.child.filter(_.text.trim.nonEmpty).
+        map(elem => (elem.label.trim, elem.text)).
+        filter(_._1 != CustomJobStr)
+      allAttributes.foreach(attribute => bw.write(s"${attribute._1}=${attribute._2}\n"))
+      bw.close()
+    }
+    }
 
   }
 
