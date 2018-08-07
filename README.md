@@ -25,7 +25,7 @@ Available from the [Central Repository](https://mvnrepository.com/artifact/io.gi
 
 ### Types of jobs supported
 
-####Command Job
+#### Command Job
 
 * By default it will be a command job and only following parameters can be set
 
@@ -44,7 +44,7 @@ Available from the [Central Repository](https://mvnrepository.com/artifact/io.gi
 
 * If any extra properties to be added in job you can mention in flow specific property file.
 
-####Custom Job
+#### Custom Job
 
 * Add following property to the job node if job is custom
 
