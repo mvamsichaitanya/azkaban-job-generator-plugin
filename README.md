@@ -1,4 +1,4 @@
-## azkaban-job-generation-plugin
+## Azkaban Job Generation Plugin
 
 azkaban-job-generation-plugin generates Azkaban flows in zip format by taking flows in xml file.
 It also validates DAG of the flow during build.

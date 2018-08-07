@@ -8,7 +8,7 @@ import scala.collection.{mutable, immutable}
   *
   **/
 
-case class Graph[T](nodes: immutable.Seq[T], name: String) {
+case class Graph[T](nodes: immutable.Seq[T], name: String = "graph") {
 
   type parent = T
   type childNodes = immutable.Seq[T]
