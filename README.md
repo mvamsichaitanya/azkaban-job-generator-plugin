@@ -158,7 +158,9 @@ job file in key value pairs.
 
     ```parameter```       =>         ```default_value```
     
-    ```resourcesPath```   =>         ${project.basedir}/src/main/resources/
+    ```flowsPath```       =>         ${project.basedir}/src/main/resources/
+    
+    ```propertiesPath```  =>         ${project.basedir}/src/main/resources/
     
     ```jobsFile```        =>         flows.xml
     
