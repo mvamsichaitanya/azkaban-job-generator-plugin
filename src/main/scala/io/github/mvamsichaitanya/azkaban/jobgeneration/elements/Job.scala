@@ -4,6 +4,10 @@ import io.github.mvamsichaitanya.azkaban.jobgeneration.constants.Constants._
 import io.github.mvamsichaitanya.azkaban.jobgeneration.enums.JobTypes.Type
 import scala.xml.Node
 
+/**
+  * Trait of the JOB
+  * extended by Command job and Custom job
+  */
 trait Job {
 
   def jobType: Type
@@ -18,9 +22,10 @@ object Job {
 
   /**
     * Generate Job object from xml [[Node]]
+    * Generates [[CommandJob]] or [[CustomJob]] object according to parameter
     *
     * @param node xml job Node
-    * @return [[CommandJob]] object
+    * @return [[CommandJob]] or [[CustomJob]] object
     */
   def fromXml(node: Node): Job = {
 

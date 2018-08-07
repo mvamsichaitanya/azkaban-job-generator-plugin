@@ -31,10 +31,13 @@ object ValidationUtils {
 
     graph.validateDependencies()
 
+    if (graph.containsDuplicates)
+      throw new Exception(s"duplicate jobs are present in ${graph.name}")
+
     if (graph.isCyclic)
-      throw new Exception("Cycle found in graph")
+      throw new Exception(s"Cycle found in flow ${graph.name}")
     if (!graph.isConnected)
-      throw new Exception("more than one DAG found")
+      throw new Exception(s"more than one DAG found in flow ${graph.name}")
   }
 
 }

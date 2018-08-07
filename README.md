@@ -23,6 +23,37 @@ Available from the [Central Repository](https://mvnrepository.com/artifact/io.gi
    
    => global or shared property files are kept in root folder 
 
+### Types of jobs supported
+
+####Command Job
+
+* By default it will be a command job and only following parameters can be set
+
+```
+      command
+      arguments
+      working.dir
+      retries
+      retry.backoff
+      failure.emails
+      success.emails
+      notify.emails
+      dependency
+
+```
+
+* If any extra properties to be added in job you can mention in flow specific property file.
+
+####Custom Job
+
+* Add following property to the job node if job is custom
+
+```
+<customJob>true</customJob>
+```
+
+* All properties mentioned in the CustomJob(except customJob property) node will be written to 
+job file in key value pairs.
 
 ### How to use.
 

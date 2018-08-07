@@ -5,6 +5,7 @@ import io.github.mvamsichaitanya.azkaban.jobgeneration.elements.{Flow, Job}
 import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.Graph
 import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.ValidationUtils._
 import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.Utils._
+
 import org.apache.maven.plugin.AbstractMojo
 import org.apache.maven.plugins.annotations.{Mojo, Parameter}
 
@@ -31,11 +32,15 @@ class JobGenerationMojo extends AbstractMojo {
 
   /**
     * path of flows.xml file
-    * default value is project.basedir/src/main/resources/flows.xml
+    * default value is project.basedir/src/main/resources/
     */
   @Parameter(defaultValue = "${project.basedir}/src/main/resources")
   private val flowsPath: String = null
 
+  /**
+    * path of property files
+    * default value is project.basedir/src/main/resources/
+    */
   @Parameter(defaultValue = "${project.basedir}/src/main/resources")
   private val propertiesPath: String = null
 
@@ -70,7 +75,7 @@ class JobGenerationMojo extends AbstractMojo {
         case _ => flow.attribute(Name).get.text
       }
       val jobs = getJobs(flow)
-      Flow(name, jobs, createGraph(jobs), getFlowPropFiles(flow))
+      Flow(name, jobs, createGraph(jobs, name), getFlowPropFiles(flow))
     })
   }
 
@@ -103,9 +108,9 @@ class JobGenerationMojo extends AbstractMojo {
     * @param jobs : List of [[Job]]
     * @return Graph of jobs
     */
-  def createGraph(jobs: immutable.Seq[Job]): Graph[String] = {
+  def createGraph(jobs: immutable.Seq[Job], name: String): Graph[String] = {
 
-    val graph = new Graph[String](jobs.map(_.name).toList)
+    val graph = new Graph[String](jobs.map(_.name).toList, name)
 
     val jobsWithName: Map[String, Job] = jobs.map(job => (job.name, job)).toMap
     jobsWithName.keys.foreach(name => graph.add(name, List.empty[String]))

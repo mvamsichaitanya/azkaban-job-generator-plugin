@@ -8,7 +8,7 @@ import scala.collection.{mutable, immutable}
   *
   **/
 
-class Graph[T](nodes: immutable.Seq[T]) {
+case class Graph[T](nodes: immutable.Seq[T], name: String) {
 
   type parent = T
   type childNodes = immutable.Seq[T]
@@ -40,14 +40,14 @@ class Graph[T](nodes: immutable.Seq[T]) {
     *
     * @return true if cyclic
     */
-  def isCyclic: Boolean = GraphAlgorithms.isCyclic[T](graph)
+  def isCyclic: Boolean = GraphAlgorithms.isCyclic[T](graph, name)
 
   /**
     * Checks whether given graph is forest or not
     *
     * @return true if not a forest
     */
-  def isConnected: Boolean = GraphAlgorithms.isConnected[T](nodes, graph)
+  def isConnected: Boolean = GraphAlgorithms.isConnected[T](nodes, graph, name)
 
   /**
     * @return true if duplicate nodes are found

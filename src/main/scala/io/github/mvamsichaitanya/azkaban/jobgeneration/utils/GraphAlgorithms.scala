@@ -14,7 +14,8 @@ object GraphAlgorithms {
     * @tparam T Type of graph
     * @return false if graph is acyclic
     */
-  def isCyclic[T](graph: mutable.ListMap[T, immutable.Seq[T]]): Boolean = {
+  def isCyclic[T](graph: mutable.ListMap[T, immutable.Seq[T]],
+                  name: String): Boolean = {
 
     /**
       * Recursive method to perform DFS(Depth first search) and detect cycle
@@ -29,7 +30,7 @@ object GraphAlgorithms {
                                parent: Option[T]): Boolean = {
 
       if (visited.getOrElse(elem, false))
-        throw new Exception(s"cycle detected between $elem and ${parent.get}")
+        throw new Exception(s"cycle detected between $elem and ${parent.get} in flow $name")
 
       visited(elem) = true
       val childNodes = graph(elem)
@@ -79,6 +80,7 @@ object GraphAlgorithms {
     */
   def isConnected[T](nodes: immutable.Seq[T],
                      graph: mutable.ListMap[T, immutable.Seq[T]],
+                     name: String,
                      isDirected: Boolean = true): Boolean = {
 
     val unDirectedGraph = graph.clone()
@@ -122,7 +124,8 @@ object GraphAlgorithms {
     val unVisitedNodes = nodes.filterNot(visitedNodes.contains)
 
     if (unVisitedNodes.lengthCompare(0) > 0)
-      throw new Exception(s"connectivity not found in graph at ${unVisitedNodes.mkString(",")}")
+      throw new Exception(s"connectivity not found in flow $name between ${unVisitedNodes.mkString(",")} " +
+        s"and ${visitedNodes.mkString(",")}")
 
     true
   }
@@ -132,8 +135,6 @@ object GraphAlgorithms {
 
     val nodesWithOutDegrees = graph.filter(tuple => tuple._2.nonEmpty).keys.toSeq
     val zeroOutDegreeNodes = nodes.filterNot(nodesWithOutDegrees.contains)
-    if (zeroOutDegreeNodes.isEmpty)
-      throw new Exception(s"no leaf jobs found in $graph")
     zeroOutDegreeNodes
   }
 
