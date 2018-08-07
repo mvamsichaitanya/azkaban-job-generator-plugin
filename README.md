@@ -147,7 +147,9 @@ job file in key value pairs.
         
     ```jobsFile```        =>         Name of xml file where flows are mentioned in above specified format
     
-    ```resourcesPath```   =>         Path where jobsFile and property files are present
+    ```flowsPath```       =>         Path where jobsFile is present
+    
+    ```propertiesPath```  =>         Path where propertyFiles are present
 
     ```outputDirectory``` =>         Output directory where zip file to be generated
     
