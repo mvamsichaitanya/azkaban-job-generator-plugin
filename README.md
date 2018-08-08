@@ -184,21 +184,6 @@ job file in key value pairs.
    
 8. azkaban.zip contains job files generated from flows.xml and properties file present in ```resourcesPath```
 
-9. following parameters can be set for job.
-
-```
-      command
-      arguments
-      working.dir
-      retries
-      retry.backoff
-      failure.emails
-      success.emails
-      notify.emails
-      dependency
-
-```
-
 ### LICENSE
 
 [MIT](https://github.com/mvamsichaitanya/azkaban-job-generator-plugin/blob/master/LICENSE.txt)
