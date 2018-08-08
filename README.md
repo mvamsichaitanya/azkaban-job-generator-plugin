@@ -123,7 +123,7 @@ job file in key value pairs.
             <plugin>
                 <groupId>io.github.mvamsichaitanya</groupId>
                 <artifactId>azkaban-job-generation</artifactId>
-                <version>1.0.3</version>
+                <version>${latest_version_in_release}</version>
                 <inherited>false</inherited>
                 <configuration>
                     <resourcesPath>${project.basedir}/src/main/resources/</resourcesPath>
