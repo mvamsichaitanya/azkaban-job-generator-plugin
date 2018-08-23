@@ -55,6 +55,10 @@ Available from the [Central Repository](https://mvnrepository.com/artifact/io.gi
 * All properties mentioned in the CustomJob(except customJob property) node will be written to 
 job file in key value pairs.
 
+### Flow of the code
+
+![Cat](https://github.com/mvamsichaitanya/azkaban-job-generator-plugin/tree/master/src/main/resources/images/flow.jpg)
+
 ### How to use.
 
 1. Create xml file with flows and their jobs,property files as shown in below sample file

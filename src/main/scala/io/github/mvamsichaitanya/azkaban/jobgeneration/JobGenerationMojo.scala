@@ -52,11 +52,18 @@ class JobGenerationMojo extends AbstractMojo {
   private val jobsFile: String = null
 
   /**
-    * Name of the zip file
+    * Root directory name of job files.
     * default value is azkaban
     */
   @Parameter(defaultValue = "azkaban")
-  private val zipFile: String = null
+  private val directoryName: String = null
+
+  /**
+    * Name of the zip file
+    * default value is azkaban
+    */
+  @Parameter(defaultValue = "true")
+  private val zip: String = null
 
 
   /**
@@ -148,7 +155,7 @@ class JobGenerationMojo extends AbstractMojo {
     val inputPropPath = propertiesPath
     val jobsFileName = jobsFile
     val outputPath = outputDirectory
-    val zipName = zipFile
+    val zipName = directoryName
     val xmlFile = xml.XML.loadFile(s"$inputFlowsPath/$jobsFileName")
     val flows = getFlows(xmlFile)
     val flowsOutputDir = s"$outputPath/$zipName"
@@ -165,7 +172,8 @@ class JobGenerationMojo extends AbstractMojo {
       addPropFiles(flow.propFiles, inputPropPath, flowOutputDir)
     })
 
-    makeZip(flowsOutputDir)
+    if (zip == "true")
+      makeZip(flowsOutputDir)
   }
 
 }
