@@ -87,7 +87,8 @@ object Utils {
                    filesPath: String,
                    outputDir: String): Unit =
     propFiles.foreach(file => {
-      (root / s"$filesPath/$file").copyTo(root / s"$outputDir/$file")
+      if ((root / s"$filesPath/$file").exists)
+        (root / s"$filesPath/$file").copyTo(root / s"$outputDir/$file")
     })
 
   /**
