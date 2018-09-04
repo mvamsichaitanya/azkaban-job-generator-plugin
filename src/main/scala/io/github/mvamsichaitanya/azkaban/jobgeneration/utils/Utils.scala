@@ -73,7 +73,6 @@ object Utils {
       bw.close()
     }
     }
-
   }
 
   /**
@@ -97,5 +96,4 @@ object Utils {
     */
   def makeZip(directoryPathToZip: String): Unit =
     (root / directoryPathToZip).zipTo(root / s"$directoryPathToZip.zip")
-
 }

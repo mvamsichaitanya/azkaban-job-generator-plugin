@@ -3,23 +3,21 @@ package io.github.mvamsichaitanya.azkaban.jobgeneration.elements
 import io.github.mvamsichaitanya.azkaban.jobgeneration.constants.Constants._
 import io.github.mvamsichaitanya.azkaban.jobgeneration.enums.JobTypes.Type
 import scala.xml.Node
+import io.github.mvamsichaitanya.azkaban.jobgeneration.utils.ValidationUtils.validateCommandJob
 
 /**
   * Trait of the JOB
   * extended by Command job and Custom job
   */
 trait Job {
-
   def jobType: Type
 
   val name: String
 
   val dependency: Seq[String]
-
 }
 
 object Job {
-
   /**
     * Generate Job object from xml [[Node]]
     * Generates [[CommandJob]] or [[CustomJob]] object according to parameter
@@ -43,6 +41,7 @@ object Job {
       )
     }
     else {
+      validateCommandJob(node)
       CommandJob(
         name = node.attribute(Name) match {
           case None => throw new Exception("Job name is not defined \n Attribute 'name' is mandatory for job")
@@ -63,5 +62,4 @@ object Job {
       )
     }
   }
-
 }

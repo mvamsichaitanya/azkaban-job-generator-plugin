@@ -15,7 +15,5 @@ import scala.xml.Node
 case class CustomJob(override val name: String,
                      node: Node,
                      override val dependency: Seq[String]) extends Job {
-
   override def jobType: Type = JobTypes.Custom
-
 }

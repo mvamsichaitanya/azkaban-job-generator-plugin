@@ -4,8 +4,6 @@ import scala.collection.{mutable, immutable}
 
 /**
   * Generic Directed graph of type `T`
-  *
-  *
   **/
 
 case class Graph[T](nodes: immutable.Seq[T], name: String = "graph") {
@@ -58,5 +56,4 @@ case class Graph[T](nodes: immutable.Seq[T], name: String = "graph") {
   def leafNodes: Seq[T] = GraphAlgorithms.getLeafNodes[T](graph, nodes)
 
   override def toString: String = graph.mkString("\n")
-
 }

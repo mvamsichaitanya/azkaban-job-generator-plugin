@@ -19,7 +19,6 @@ import scala.xml.{Elem, Node}
 @Mojo(name = "job_generation")
 class JobGenerationMojo extends AbstractMojo {
 
-
   /**
     * Parameters for plugin
     */
@@ -35,7 +34,7 @@ class JobGenerationMojo extends AbstractMojo {
     * default value is project.basedir/src/main/resources/
     */
   @Parameter(defaultValue = "${project.basedir}/src/main/resources")
-  private val flowsPath: String = null
+  private val jobsFilePath: String = null
 
   /**
     * path of property files
@@ -151,7 +150,7 @@ class JobGenerationMojo extends AbstractMojo {
     */
   override def execute(): Unit = {
 
-    val inputFlowsPath = flowsPath
+    val inputFlowsPath = jobsFilePath
     val inputPropPath = propertiesPath
     val jobsFileName = jobsFile
     val outputPath = outputDirectory

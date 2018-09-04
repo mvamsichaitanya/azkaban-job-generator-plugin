@@ -4,8 +4,6 @@ import scala.collection.mutable
 import scala.collection.immutable
 
 object GraphAlgorithms {
-
-
   /**
     * Checks whether graph is cyclic or not
     * Cycle check is performed on all nodes whose inDegree is zero
@@ -28,7 +26,6 @@ object GraphAlgorithms {
     def detectCycleRecursively(visited: mutable.Map[T, Boolean],
                                elem: T,
                                parent: Option[T]): Boolean = {
-
       if (visited.getOrElse(elem, false))
         throw new Exception(s"cycle detected between $elem and ${parent.get} in flow $name")
 
@@ -114,22 +111,25 @@ object GraphAlgorithms {
           }
         })
       }
-
     }
 
     performBFT()
 
     val visitedNodes = visited.keys.toSeq
-
     val unVisitedNodes = nodes.filterNot(visitedNodes.contains)
-
     if (unVisitedNodes.lengthCompare(0) > 0)
       throw new Exception(s"connectivity not found in flow $name between ${unVisitedNodes.mkString(",")} " +
         s"and ${visitedNodes.mkString(",")}")
-
     true
   }
 
+  /**
+    *
+    * @param graph Graph
+    * @param nodes All nodes of graph
+    * @tparam T Type of graph
+    * @return Seq of leaf nodes
+    */
   def getLeafNodes[T](graph: mutable.ListMap[T, immutable.Seq[T]],
                       nodes: immutable.Seq[T]): Seq[T] = {
 
@@ -137,5 +137,4 @@ object GraphAlgorithms {
     val zeroOutDegreeNodes = nodes.filterNot(nodesWithOutDegrees.contains)
     zeroOutDegreeNodes
   }
-
 }

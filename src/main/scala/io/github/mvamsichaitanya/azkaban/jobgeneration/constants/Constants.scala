@@ -11,7 +11,6 @@ object Constants {
   /**
     * Parameter Constants
     */
-
   final val CustomJobStr = "customJob"
   final val Name = "name"
   final val Arguments = "arguments"
@@ -26,6 +25,9 @@ object Constants {
   final val PropertyFiles = "propertyFiles"
   final val File = "file"
 
+  final val CommandJobParameters = List(Command, Arguments, Dependency, WorkingDirStr,
+    RetriesStr, RetryBackoffStr, FailureEmailsStr, SuccessEmailsStr, NotifyEmails)
+
   /**
     * Job Types
     */
@@ -36,5 +38,4 @@ object Constants {
     */
   final val EmptyString = ""
   final val Comma = ","
-
 }

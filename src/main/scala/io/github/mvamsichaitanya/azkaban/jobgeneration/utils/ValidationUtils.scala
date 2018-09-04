@@ -1,9 +1,23 @@
 package io.github.mvamsichaitanya.azkaban.jobgeneration.utils
 
 import scala.collection.{immutable, mutable}
+import scala.xml.Node
+import io.github.mvamsichaitanya.azkaban.jobgeneration.constants.Constants.CommandJobParameters
 
 object ValidationUtils {
 
+  /**
+    * throw exception if parameters other than `CommandJobParameters` are present
+    *
+    * @param node Command job node
+    */
+  def validateCommandJob(node: Node): Unit = {
+    val wrongParams = node.child.filter(_.text.trim.nonEmpty).map(_.label).filterNot(CommandJobParameters.contains)
+    if (wrongParams.nonEmpty)
+      throw new Exception(s" params ${wrongParams.mkString(",")} are not supported \n " +
+        s"Command Job Parameters should be from ${CommandJobParameters.mkString(",")}" +
+        s"\n keep additional parameters in flow specific property file")
+  }
 
   /**
     *
@@ -39,5 +53,4 @@ object ValidationUtils {
     if (!graph.isConnected)
       throw new Exception(s"more than one DAG found in flow ${graph.name}")
   }
-
 }
