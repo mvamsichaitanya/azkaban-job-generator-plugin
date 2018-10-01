@@ -50,7 +50,7 @@ object ValidationUtils {
 
     if (graph.isCyclic)
       throw new Exception(s"Cycle found in flow ${graph.name}")
-    if (!graph.isConnected)
-      throw new Exception(s"more than one DAG found in flow ${graph.name}")
+//    if (!graph.isConnected)
+//      throw new Exception(s"more than one DAG found in flow ${graph.name}")
   }
 }

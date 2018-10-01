@@ -35,7 +35,7 @@ object Job {
         },
         node = node,
         dependency = {
-          val value = (node \\ Dependency).text.trim
+          val value = (node \\ Dependencies).text.trim
           if (value.isEmpty) Nil else value.split(Comma).toSeq
         }
       )
@@ -50,7 +50,7 @@ object Job {
         command = (node \\ Command).text,
         arguments = (node \\ Arguments).text,
         dependency = {
-          val value = (node \\ Dependency).text.trim
+          val value = (node \\ Dependencies).text.trim
           if (value.isEmpty) Nil else value.split(Comma).toSeq
         },
         workingDir = (node \\ WorkingDirStr).text,

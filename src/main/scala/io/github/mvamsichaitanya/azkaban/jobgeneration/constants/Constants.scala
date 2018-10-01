@@ -21,11 +21,11 @@ object Constants {
   final val FailureEmailsStr = "failure.emails"
   final val SuccessEmailsStr = "success.emails"
   final val NotifyEmails = "notify.emails"
-  final val Dependency = "dependency"
+  final val Dependencies = "dependencies"
   final val PropertyFiles = "propertyFiles"
   final val File = "file"
 
-  final val CommandJobParameters = List(Command, Arguments, Dependency, WorkingDirStr,
+  final val CommandJobParameters = List(Command, Arguments, Dependencies, WorkingDirStr,
     RetriesStr, RetryBackoffStr, FailureEmailsStr, SuccessEmailsStr, NotifyEmails)
 
   /**
